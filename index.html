@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Math Escape Protocol</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- FONDO -->
+  <div class="background-grid"></div>
+  <div class="particles"></div>
+
+  <!-- HUD -->
+  <header class="hud">
+
+    <div class="logo">
+      MATH ESCAPE PROTOCOL
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="progress-text">
+      Pruebas completadas:
+      <span id="completed">0</span>/8
+    </div>
+
+  </header>
+
+  <!-- ===================================== -->
+  <!-- PORTADA -->
+  <!-- ===================================== -->
+
+  <section class="screen active" id="homeScreen">
+
+    <div class="glass panel hero-panel glow">
+
+      <h1 class="hero-title">
+        ESCAPE DEL LABORATORIO MATEMÁTICO
+      </h1>
+
+      <p class="hero-text">
+        Un sistema de inteligencia artificial ha bloqueado el laboratorio secreto.
+        Solo resolviendo enigmas matemáticos podrás escapar antes de que el sistema
+        cierre todas las puertas definitivamente.
+      </p>
+
+      <div class="countdown-box">
+        <span class="danger-dot"></span>
+        PROTOCOLO DE BLOQUEO ACTIVADO
+      </div>
+      <input
+        type="text"
+        id="playerName"
+        placeholder="Introduce tu nombre"
+        />
+      <div class="hero-buttons">
+
+        <button class="main-btn" id="startBtn">
+          COMENZAR
+        </button>
+
+        <button class="secondary-btn" id="musicBtn">
+          🔊 Música ON
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- HISTORIA -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="storyScreen">
+
+    <div class="glass panel">
+
+      <h2>LABORATORIO SECRETO</h2>
+
+      <p>
+        Has despertado atrapado en una instalación matemática experimental.
+      </p>
+
+      <p>
+        El sistema central ha ocultado el código de salida en distintas pruebas.
+      </p>
+
+      <p>
+        Cada desafío matemático desbloqueará una cifra del código final.
+      </p>
+
+      <p>
+        Si no logras resolver todas las pruebas a tiempo...
+        el laboratorio permanecerá sellado.
+      </p>
+
+      <div class="fake-timer" id="timer">
+        00:59:59
+      </div>
+
+      <button class="main-btn" data-next="room1">
+        INICIAR PRUEBAS
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 1 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room1">
+
+    <div class="glass panel room-panel">
+
+      <h2>
+        PRUEBA 1 — ECUACIÓN DE ACCESO
+      </h2>
+
+      <p>
+        Resuelve la ecuación para desbloquear la puerta principal.
+      </p>
+
+      <div class="equation">
+        2x + 5 = 17
+      </div>
+
+      <input
+        type="number"
+        id="answer1"
+        placeholder="Introduce el valor de x"
+      >
+
+      <button
+        class="main-btn"
+        onclick="checkRoom1()"
+      >
+        DESBLOQUEAR
+      </button>
+
+      <div class="feedback" id="feedback1"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 2 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room2">
+
+    <div class="glass panel room-panel">
+
+      <h2>
+        PRUEBA 2 — CÓDIGO OCULTO
+      </h2>
+
+      <p>
+        Resuelve ambas ecuaciones y une los resultados.
+      </p>
+
+      <div class="cards-grid">
+
+        <div class="code-card">
+
+          <p>x + 3 = 7</p>
+
+          <input
+            type="number"
+            id="xValue"
+            placeholder="Valor de x"
+          >
+
+        </div>
+
+        <div class="code-card">
+
+          <p>2y - 3 = 11</p>
+
+          <input
+            type="number"
+            id="yValue"
+            placeholder="Valor de y"
+          >
+
+        </div>
+
+      </div>
+
+      <p class="hint-text">
+        Une ambas soluciones para formar el código.
+      </p>
+
+      <button
+        class="main-btn"
+        onclick="checkRoom2()"
+      >
+        VALIDAR CÓDIGO
+      </button>
+
+      <div class="feedback" id="feedback2"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 3 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room3">
+
+    <div class="glass panel room-panel">
+
+      <h2>
+        PRUEBA 3 — ORDEN CORRECTO
+      </h2>
+
+      <p>
+        Ordena las soluciones de menor a mayor.
+      </p>
+
+      <div class="equations-list">
+
+        <div>
+          x + 1 = 3 → solución = 2
+        </div>
+
+        <div>
+          2x = 10 → solución = 5
+        </div>
+
+        <div>
+          3x = 27 → solución = 9
+        </div>
+
+      </div>
+
+      <input
+        type="text"
+        id="orderInput"
+        placeholder="Ejemplo: 2,5,9"
+      >
+
+      <button
+        class="main-btn"
+        onclick="checkRoom3()"
+      >
+        COMPROBAR
+      </button>
+
+      <div class="feedback" id="feedback3"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 4 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room4">
+
+    <div class="glass panel room-panel">
+
+      <h2>
+        PRUEBA 4 — CANDADO DIGITAL
+      </h2>
+
+      <p>
+        Resuelve las ecuaciones y obtén el código del candado.
+      </p>
+
+      <div class="safe-lock">
+
+        <div class="lock-wheel">
+          x + 2 = 5
+        </div>
+
+        <div class="lock-wheel">
+          2x = 8
+        </div>
+
+        <div class="lock-wheel">
+          x - 1 = 6
+        </div>
+
+      </div>
+
+      <input
+        type="text"
+        id="lockInput"
+        placeholder="Código de 3 cifras"
+      >
+
+      <button
+        class="main-btn"
+        onclick="checkRoom4()"
+      >
+        ABRIR CANDADO
+      </button>
+
+      <div class="feedback" id="feedback4"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 5 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room5">
+
+    <div class="glass panel room-panel">
+
+      <h2>
+        PRUEBA 5 — PANEL LÁSER
+      </h2>
+
+      <p>
+        Activa únicamente las ecuaciones cuya solución sea positiva.
+      </p>
+
+      <div class="laser-grid">
+
+        <button class="laser-btn">
+          x + 4 = 10
+        </button>
+
+        <button class="laser-btn">
+          x + 5 = 2
+        </button>
+
+        <button class="laser-btn">
+          2x = 14
+        </button>
+
+        <button class="laser-btn">
+          x - 8 = -20
+        </button>
+
+      </div>
+
+      <button
+        class="main-btn"
+        onclick="checkRoom5()"
+      >
+        ACTIVAR PANEL
+      </button>
+
+      <div class="feedback" id="feedback5"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 6 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room6">
+
+    <div class="glass panel room-panel">
+
+      <h2>
+        PRUEBA 6 — MEMORIA MATEMÁTICA
+      </h2>
+
+      <p>
+        Empareja cada ecuación con su solución correcta.
+      </p>
+
+      <div class="memory-grid" id="memoryGrid"></div>
+
+      <div class="feedback" id="feedback6"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================================== -->
+  <!-- PRUEBA 7 -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="room7">
+
+    <div class="glass panel final-room">
+
+      <h2>
+        SALA FINAL
+      </h2>
+
+      <p>
+        Introduce el código obtenido y resuelve la ecuación final.
+      </p>
+
+      <input
+        type="text"
+        id="finalCode"
+        placeholder="Código secreto"
+      >
+
+      <div class="equation final-equation">
+        3x + 9 = 24
+      </div>
+
+      <input
+        type="number"
+        id="finalEquation"
+        placeholder="Resultado de x"
+      >
+
+      <button
+        class="main-btn"
+        onclick="finishGame()"
+      >
+        DESBLOQUEAR PUERTA
+      </button>
+
+      <div class="door" id="door">
+        <div class="door-line"></div>
+      </div>
+
+      <div class="feedback" id="finalFeedback"></div>
+
+    </div>
+
+  </section>
+  <!-- ===================================== -->
+  <!-- PRUEBA final -->
+  <!-- ===================================== -->
+  <section class="screen" id="bossScreen">
+
+  <div class="glass panel final-room">
+
+    <h2>
+      NÚCLEO CENTRAL
+    </h2>
+
+    <p>
+      El sistema ha activado un último bloqueo.
+    </p>
+
+    <p>
+      La suma de las edades actuales de Sara y su hermano Ghali
+    es 20. Dentro de 7 años la diferencia entre la edad de Ghali y la
+    de Sara será igual a la edad actual de Sara menos 1. Calcula las
+    edades actuales de los hermanos. 
+    </p>
+
+    <input
+      type="text"
+      id="bossAnswerEq"
+      placeholder="Ecuación"
+    >
+
+    <input
+      type="number"
+      id="bossAnswer"
+      placeholder="Ejemplo: 5,9"
+    >
+
+    <button
+      class="main-btn"
+      onclick="checkBossLevel()"
+    >
+      DESACTIVAR SISTEMA
+    </button>
+
+    <div class="feedback" id="bossFeedback"></div>
+
+  </div>
+
+</section>
+
+  <!-- ===================================== -->
+  <!-- VICTORIA -->
+  <!-- ===================================== -->
+
+  <section class="screen" id="victoryScreen">
+
+    <div class="glass panel victory-panel glow">
+
+      <h1 class="victory-title">
+        MISIÓN COMPLETADA
+      </h1>
+
+      <p>
+        Has conseguido escapar del laboratorio matemático.
+      </p>
+
+      <p>
+        El sistema de seguridad ha sido desactivado correctamente.
+      </p>
+
+      <p>
+        Todas las ecuaciones han sido resueltas.
+      </p>
+      <div class="ranking-box">
+
+    <h3>🏆 TOP 3</h3>
+
+    <div id="rankingList"></div>
+
+    </div>
+      <button
+        class="main-btn"
+        onclick="restartGame()"
+      >
+        JUGAR OTRA VEZ
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- AUDIO -->
+  <audio id="bgMusic" loop>
+    <source src="" type="audio/mpeg">
+  </audio>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+</body>
+</html>
