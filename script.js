@@ -1,4 +1,25 @@
 // ===============================
+// SUPABASE
+// ===============================
+const SUPABASE_URL =
+  'https://tndzgnwqjufmlvfeyxpt.supabase.co';
+
+const SUPABASE_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRuZHpnbndxanVmbWx2ZmV5eHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNTkyODUsImV4cCI6MjA5MzczNTI4NX0.UkUz9O_faMaWI65bPopamT1_mY6cVvZ8lXvb4-aUVi8';
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+
+
+
+
+
+// ===============================
 // VARIABLES GLOBALES
 // ===============================
 
@@ -34,7 +55,17 @@ function showScreen(id) {
     target.classList.remove('screen-transition');
   }, 700);
 }
+function openRanking() {
 
+  loadRanking();
+
+  showScreen('rankingScreen');
+}
+
+function goBackHome() {
+
+  showScreen('homeScreen');
+}
 // ===============================
 // BOTONES INICIO
 // ===============================
@@ -419,10 +450,11 @@ function checkBossLevel() {
     document.getElementById('bossAnswerEq').value;
 
   if((answer == '15,23' || answer == '23,15') && (bossAnswerEq == 'x + (x + 8) = 38' || bossAnswerEq == '2x + 8) = 38')) {
-
+    
     saveScore();
-
+    updateProgress();
     showScreen('victoryScreen');
+    
 
   } else {
 
@@ -508,61 +540,69 @@ panels.forEach(panel => {
     panel.style.background = 'rgba(255,255,255,0.08)';
   });
 });
-function renderRanking(scores) {
 
-  const ranking =
-    document.getElementById('rankingList');
-
-  ranking.innerHTML = '';
-
-  scores.forEach((player, index) => {
-
-    ranking.innerHTML += `
-      <div class="ranking-item">
-        #${index + 1}
-        — ${player.name}
-        — ${player.time}s
-      </div>
-    `;
-  });
-}
 
 window.addEventListener('load', () => {
-
-  const scores =
-    JSON.parse(localStorage.getItem('mathEscapeRanking'))
-    || [];
-
-  renderRanking(scores);
+  loadRanking();
 });
 
-function saveScore() {
+async function saveScore() {
 
   const endTime = Date.now();
 
   const totalTime =
     Math.floor((endTime - startTime) / 1000);
 
-  const newScore = {
-    name: playerName,
-    time: totalTime
-  };
+  await supabaseClient
+    .from('ranking')
+    .insert([
+      {
+        player_name: playerName,
+        completion_time: totalTime
+      }
+    ]);
 
-  let scores =
-    JSON.parse(localStorage.getItem('mathEscapeRanking'))
-    || [];
-
-  scores.push(newScore);
-
-  scores.sort((a, b) => a.time - b.time);
-
-  scores = scores.slice(0, 3);
-
-  localStorage.setItem(
-    'mathEscapeRanking',
-    JSON.stringify(scores)
-  );
-
-  renderRanking(scores);
+  await loadRanking();
 }
 
+async function loadRanking() {
+
+  const { data, error } =
+    await supabaseClient
+      .from('ranking')
+      .select('*')
+      .order('completion_time', {
+        ascending: true
+      })
+      .limit(3);
+
+  if(error) {
+
+    console.error(error);
+
+    return;
+  }
+
+  renderRanking(data);
+}
+
+function renderRanking(players) {
+
+  console.log("Ranking: ", players);
+  const ranking =
+    document.getElementById('rankingList');
+
+  ranking.innerHTML = '';
+  
+  players.forEach((player, index) => {
+    console.log("Ranking: ", player);
+
+    ranking.innerHTML += `
+      <div class="ranking-item">
+        🏆 #${index + 1}
+        — ${player.player_name}
+        — ${player.completion_time}s
+      </div>
+    `;
+  });
+}

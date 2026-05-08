@@ -66,6 +66,12 @@
         <button class="main-btn" id="startBtn">
           COMENZAR
         </button>
+        <button
+        class="secondary-btn"
+        onclick="openRanking()"
+      >
+        🏆 Ver Ranking
+      </button>
 
         <button class="secondary-btn" id="musicBtn">
           🔊 Música ON
@@ -468,7 +474,7 @@
     >
 
     <input
-      type="number"
+      type="text"
       id="bossAnswer"
       placeholder="Ejemplo: 5,9"
     >
@@ -485,7 +491,38 @@
   </div>
 
 </section>
+<!-- ===================================== -->
+<!-- RANKING -->
+<!-- ===================================== -->
 
+<section class="screen" id="rankingScreen">
+
+  <div class="glass panel">
+
+    <h1 class="victory-title">
+      🏆 RANKING GLOBAL
+    </h1>
+
+    <div class="ranking-box">
+
+      <div id="rankingList">
+        <div id="rankingList">
+          Cargando ranking...
+      </div>
+      </div>
+
+    </div>
+
+    <button
+      class="main-btn"
+      onclick="goBackHome()"
+    >
+      VOLVER
+    </button>
+
+  </div>
+
+</section>
   <!-- ===================================== -->
   <!-- VICTORIA -->
   <!-- ===================================== -->
@@ -509,13 +546,12 @@
       <p>
         Todas las ecuaciones han sido resueltas.
       </p>
-      <div class="ranking-box">
-
-    <h3>🏆 TOP 3</h3>
-
-    <div id="rankingList"></div>
-
-    </div>
+      <button
+      class="secondary-btn"
+      onclick="openRanking()"
+    >
+      🏆 Ver Ranking
+    </button>
       <button
         class="main-btn"
         onclick="restartGame()"
@@ -533,6 +569,7 @@
   </audio>
 
   <!-- SCRIPT -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="script.js"></script>
 
 </body>
