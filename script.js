@@ -450,7 +450,7 @@ function checkBossLevel() {
   const bossAnswerEq =
     document.getElementById('bossAnswerEq').value;
 
-  if((answer == '15,23' || answer == '23,15') && (bossAnswerEq == 'x + (x + 8) = 38' || bossAnswerEq == '2x + 8 = 38')) {
+  if((answer == '16,34' || answer == '34,16') && (bossAnswerEq == 'x + (2x + 2) = 50' || bossAnswerEq == '3x + 2 = 50')) {
     
     saveScore();
     updateProgress();
