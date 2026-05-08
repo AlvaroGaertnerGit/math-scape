@@ -471,7 +471,7 @@ function checkBossLevel() {
 // ===============================
 
 function restartGame() {
-
+  completedRooms = 0;
   location.reload();
 }
 
