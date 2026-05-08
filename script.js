@@ -171,11 +171,11 @@ function checkRoom2() {
   const x = document.getElementById('xValue').value;
   const y = document.getElementById('yValue').value;
 
-  if (x == 4 && y == 7) {
+  if (x == 5 && y == 7) {
 
-    success('feedback2', '✔ CÓDIGO DESCUBIERTO: 47');
+    success('feedback2', '✔ CÓDIGO DESCUBIERTO: 57, CIFRA OBTENIDA: 5');
 
-    collectedCode.push('4');
+    collectedCode.push('5');
 
     updateProgress();
 
@@ -223,7 +223,7 @@ function checkRoom4() {
 
   const value = document.getElementById('lockInput').value;
 
-  if (value === '347') {
+  if (value === '252') {
 
     success('feedback4', '✔ CANDADO ABIERTO — CIFRA: 3');
 
@@ -257,9 +257,10 @@ laserButtons.forEach(button => {
 
 function checkRoom5() {
 
-  const activeButtons = document.querySelectorAll('.laser-btn.active');
-
-  if (activeButtons.length === 3) {
+  const activeButtonsC = document.querySelectorAll('.laser-correct.active');
+  const activeButtonsI = document.querySelectorAll('.laser-incorrect.active');
+  
+  if (activeButtonsI.length === 0 && activeButtonsC.length === 2) {
 
     success('feedback5', '✔ PANEL ACTIVADO — CIFRA: 8');
 
@@ -449,7 +450,7 @@ function checkBossLevel() {
   const bossAnswerEq =
     document.getElementById('bossAnswerEq').value;
 
-  if((answer == '15,23' || answer == '23,15') && (bossAnswerEq == 'x + (x + 8) = 38' || bossAnswerEq == '2x + 8) = 38')) {
+  if((answer == '15,23' || answer == '23,15') && (bossAnswerEq == 'x + (x + 8) = 38' || bossAnswerEq == '2x + 8 = 38')) {
     
     saveScore();
     updateProgress();
