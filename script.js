@@ -417,12 +417,13 @@ createMemoryGame();
 
 function finishGame() {
 
-  const finalCode = document.getElementById('finalCode').value;
-  const finalEquation = document.getElementById('finalEquation').value;
+  const finalCode = document.getElementById('finalCode').value.trim();;
+  const finalEquation = document.getElementById('finalEquation').value.trim();;
 
   const correctCode = collectedCode.join('');
 
   if (finalCode === correctCode && finalEquation == 5) {
+    console.log('Introducido:', finalCode);
 
     success('finalFeedback', '✔ PUERTA DESBLOQUEADA');
 
@@ -439,7 +440,7 @@ function finishGame() {
     }, 3000);
 
   } else {
-
+    console.log('Correcto:', correctCode);
     error('finalFeedback', '✖ CÓDIGO O ECUACIÓN INCORRECTOS', 'room7');
   }
 }
