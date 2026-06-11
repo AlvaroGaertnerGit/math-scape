@@ -98,8 +98,9 @@ document.querySelector('[data-next="room1"]').addEventListener('click', () => {
 // ===============================
 
 function updateProgress() {
-
-  completedRooms++;
+  if(completedRooms < 8) {
+    completedRooms++;
+  }
 
   completedText.textContent = completedRooms;
 
@@ -447,11 +448,13 @@ function finishGame() {
 function checkBossLevel() {
 
   const answer =
-    document.getElementById('bossAnswer').value;
-  const bossAnswerEq =
-    document.getElementById('bossAnswerEq').value;
-
-  if((answer == '16,34' || answer == '34,16') && (bossAnswerEq == 'x + (2x + 2) = 50' || bossAnswerEq == '50 = x + (2x + 2)')) {
+    document.getElementById('bossAnswer').value.trim();
+  
+  const bossAnswerEq = document
+  .getElementById('bossAnswerEq')
+  .value
+  .replace(/\s+/g, '');
+  if((answer == '16,34' || answer == '34,16') && (bossAnswerEq == 'x+(2x+2)=50' || bossAnswerEq == '50=x+(2x+2)' || bossAnswerEq == '50=(2x+2)+x' || bossAnswerEq == '(2x+2)+x=50')) {
     
     saveScore();
     updateProgress();
